@@ -2,52 +2,61 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Мой первый вайб-проект</title>
+  <title>Мини-игра</title>
 
   <style>
     body {
       font-family: Arial;
-      background: #111;
+      background: #0f172a;
       color: white;
       text-align: center;
-      padding-top: 100px;
+      padding-top: 80px;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 18px;
+      margin: 5px;
+      border-radius: 8px;
+      border: none;
     }
 
     button {
-      padding: 15px 25px;
-      font-size: 18px;
-      background: purple;
-      color: white;
-      border: none;
-      border-radius: 10px;
+      background: #22c55e;
       cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 22px;
     }
   </style>
 </head>
 
 <body>
 
-  <h1>Привет 👋</h1>
-  <p>Я учусь vibe coding</p>
+  <h1>🎮 Угадай число</h1>
+  <p>Я загадал число от 1 до 10</p>
 
-  <button onclick="sayHello()">Нажми меня</button>
+  <input id="guess" type="number" min="1" max="10">
+  <br>
+  <button onclick="check()">Проверить</button>
+
+  <div id="result"></div>
 
   <script>
-    function sayHello() {
-      alert("Ты красавчик 😎 Ты программируешь!");
+    let secret = Math.floor(Math.random() * 10) + 1;
+
+    function check() {
+      let user = document.getElementById("guess").value;
+
+      if (user == secret) {
+        document.getElementById("result").innerHTML = "🔥 Ты угадал!";
+      } else {
+        document.getElementById("result").innerHTML = "❌ Не угадал. Было: " + secret;
+      }
     }
   </script>
 
 </body>
 </html>
-<style>
-h1 {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-
