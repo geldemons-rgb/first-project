@@ -3,9 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <title>Мой первый вайб-проект</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #111;
+      color: white;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      background: purple;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Привет, мир 👋</h1>
-  <p>Я учусь программированию и vibe coding</p>
+
+  <h1>Привет 👋</h1>
+  <p>Я учусь vibe coding</p>
+
+  <button onclick="sayHello()">Нажми меня</button>
+
+  <script>
+    function sayHello() {
+      alert("Ты красавчик 😎 Ты программируешь!");
+    }
+  </script>
+
 </body>
 </html>
+
