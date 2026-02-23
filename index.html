@@ -1,62 +1,66 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Мини-игра</title>
+<meta charset="UTF-8">
+<title>Футбольная викторина</title>
 
-  <style>
-    body {
-      font-family: Arial;
-      background: #0f172a;
-      color: white;
-      text-align: center;
-      padding-top: 80px;
-    }
+<style>
+body {
+  background: #0f172a;
+  color: white;
+  text-align: center;
+  font-family: Arial;
+  padding-top: 60px;
+}
 
-    input, button {
-      padding: 10px;
-      font-size: 18px;
-      margin: 5px;
-      border-radius: 8px;
-      border: none;
-    }
+button {
+  display: block;
+  margin: 10px auto;
+  padding: 12px 20px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  width: 250px;
+}
 
-    button {
-      background: #22c55e;
-      cursor: pointer;
-    }
+.correct { background: green; }
+.wrong { background: crimson; }
+.normal { background: #1e293b; }
 
-    #result {
-      margin-top: 20px;
-      font-size: 22px;
-    }
-  </style>
+#score {
+  margin-top: 20px;
+  font-size: 22px;
+}
+</style>
 </head>
 
 <body>
 
-  <h1>🎮 Угадай число</h1>
-  <p>Я загадал число от 1 до 10</p>
+<h1>⚽ Футбольная викторина</h1>
 
-  <input id="guess" type="number" min="1" max="10">
-  <br>
-  <button onclick="check()">Проверить</button>
+<h2 id="question">Кто выиграл ЧМ-2018?</h2>
 
-  <div id="result"></div>
+<button class="normal" onclick="checkAnswer('A')">A) Бразилия</button>
+<button class="normal" onclick="checkAnswer('B')">B) Германия</button>
+<button class="normal" onclick="checkAnswer('C')">C) Франция</button>
+<button class="normal" onclick="checkAnswer('D')">D) Аргентина</button>
 
-  <script>
-    let secret = Math.floor(Math.random() * 10) + 1;
+<div id="score">Очки: 0</div>
 
-    function check() {
-      let user = document.getElementById("guess").value;
+<script>
+let points = 0;
+let correct = "C";
 
-      if (user == secret) {
-        document.getElementById("result").innerHTML = "🔥 Ты угадал!";
-      } else {
-        document.getElementById("result").innerHTML = "❌ Не угадал. Было: " + secret;
-      }
-    }
-  </script>
+function checkAnswer(answer) {
+  if (answer === correct) {
+    points++;
+    document.getElementById("score").innerHTML = "Очки: " + points + " ✅ Правильно!";
+  } else {
+    document.getElementById("score").innerHTML = "Очки: " + points + " ❌ Неправильно!";
+  }
+}
+</script>
 
 </body>
 </html>
