@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Футбольная викторина</title>
+
+<style>
+body {
+  background: #0f172a;
+  color: white;
+  text-align: center;
+  font-family: Arial;
+  padding-top: 60px;
+}
+
+button {
+  display: block;
+  margin: 10px auto;
+  padding: 12px 20px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  width: 250px;
+}
+
+.correct { background: green; }
+.wrong { background: crimson; }
+.normal { background: #1e293b; }
+
+#score {
+  margin-top: 20px;
+  font-size: 22px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>⚽ Футбольная викторина</h1>
+
+<h2 id="question">Кто выиграл ЧМ-2018?</h2>
+
+<button class="normal" onclick="checkAnswer('A')">A) Бразилия</button>
+<button class="normal" onclick="checkAnswer('B')">B) Германия</button>
+<button class="normal" onclick="checkAnswer('C')">C) Франция</button>
+<button class="normal" onclick="checkAnswer('D')">D) Аргентина</button>
+
+<div id="score">Очки: 0</div>
+
+<script>
+let points = 0;
+let correct = "C";
+
+function checkAnswer(answer) {
+  if (answer === correct) {
+    points++;
+    document.getElementById("score").innerHTML = "Очки: " + points + " ✅ Правильно!";
+  } else {
+    document.getElementById("score").innerHTML = "Очки: " + points + " ❌ Неправильно!";
+  }
+}
+</script>
+
+</body>
+</html>
