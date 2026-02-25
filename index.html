@@ -2,40 +2,36 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Футбольная викторина</title>
+<title>World Cup 2026 Predictor</title>
 
 <style>
 body {
   margin: 0;
   background: linear-gradient(rgba(0,0,40,0.8), rgba(0,0,80,0.8)),
-              url("https://s-cdn.sportbox.ru/images/styles/upload/fp_fotos/c8/0b/5cf33ddce21daaafc7734492c4c771f05a07f371cd9fe267351822.jpg");
+              url("https://images.unsplash.com/photo-1522778526097-ce0a22ceb253");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
   color: white;
-  text-align: center;
   font-family: Arial;
+  text-align: center;
   padding-top: 60px;
 }
-button {
-  display: block;
-  margin: 10px auto;
-  padding: 12px 20px;
-  font-size: 18px;
+
+select, button {
+  padding: 10px;
+  font-size: 16px;
+  margin: 10px;
   border-radius: 8px;
   border: none;
-  cursor: pointer;
-  width: 260px;
-  background: #1e293b;
-  color: white;
 }
 
-button:hover {
-  background: #334155;
+button {
+  background: #00bfff;
+  cursor: pointer;
 }
 
 #result {
-  margin-top: 20px;
+  margin-top: 30px;
   font-size: 22px;
 }
 </style>
@@ -43,83 +39,59 @@ button:hover {
 
 <body>
 
-<h1>⚽ Футбольная викторина</h1>
+<h1>🏆 World Cup 2026 Predictor</h1>
 
-<h2 id="question"></h2>
+<select id="team1">
+  <option value="90">Франция</option>
+  <option value="88">Бразилия</option>
+  <option value="89">Аргентина</option>
+  <option value="85">Англия</option>
+  <option value="84">Испания</option>
+  <option value="83">Португалия</option>
+</select>
 
-<div id="answers"></div>
+<select id="team2">
+  <option value="90">Франция</option>
+  <option value="88">Бразилия</option>
+  <option value="89">Аргентина</option>
+  <option value="85">Англия</option>
+  <option value="84">Испания</option>
+  <option value="83">Португалия</option>
+</select>
+
+<br>
+
+<button onclick="predict()">Рассчитать прогноз</button>
 
 <div id="result"></div>
 
 <script>
-let questions = [
-  {
-    question: "Кто выиграл ЧМ-2018?",
-    answers: ["Бразилия", "Германия", "Франция", "Аргентина"],
-    correct: 2
-  },
-  {
-    question: "Какой клуб выиграл ЛЧ 2022?",
-    answers: ["Ман Сити", "Реал Мадрид", "Ливерпуль", "Бавария"],
-    correct: 1
-  },
-  {
-    question: "Сколько Золотых мячей у Месси?",
-    answers: ["5", "6", "7", "8"],
-    correct: 3
-  },
-  {
-    question: "Кто лучший бомбардир в истории ЛЧ?",
-    answers: ["Месси", "Роналду", "Левандовски", "Бензема"],
-    correct: 1
-  },
-  {
-    question: "Какая страна выиграла Евро-2016?",
-    answers: ["Франция", "Германия", "Португалия", "Испания"],
-    correct: 2
-  }
-];
+function predict() {
 
-let currentQuestion = 0;
-let score = 0;
+  let team1 = document.getElementById("team1");
+  let team2 = document.getElementById("team2");
 
-function loadQuestion() {
-  let q = questions[currentQuestion];
-  document.getElementById("question").innerText = q.question;
+  let power1 = parseInt(team1.value);
+  let power2 = parseInt(team2.value);
 
-  let answersDiv = document.getElementById("answers");
-  answersDiv.innerHTML = "";
-
-  q.answers.forEach((answer, index) => {
-    let btn = document.createElement("button");
-    btn.innerText = answer;
-    btn.onclick = () => checkAnswer(index);
-    answersDiv.appendChild(btn);
-  });
-}
-
-function checkAnswer(index) {
-  if (index === questions[currentQuestion].correct) {
-    score++;
+  if (team1.selectedIndex === team2.selectedIndex) {
+    document.getElementById("result").innerHTML = "❌ Выбери разные команды!";
+    return;
   }
 
-  currentQuestion++;
+  let total = power1 + power2;
+  let chance1 = Math.round((power1 / total) * 100);
+  let chance2 = 100 - chance1;
 
-  if (currentQuestion < questions.length) {
-    loadQuestion();
-  } else {
-    showResult();
-  }
-}
+  let score1 = Math.round((power1 / 30) * Math.random());
+  let score2 = Math.round((power2 / 30) * Math.random());
 
-function showResult() {
-  document.getElementById("question").innerText = "Игра окончена!";
-  document.getElementById("answers").innerHTML = "";
   document.getElementById("result").innerHTML =
-    "⚽ Твои очки: " + score + " из " + questions.length;
+    "🔥 Вероятность победы: " +
+    team1.options[team1.selectedIndex].text + " " + chance1 + "%<br>" +
+    team2.options[team2.selectedIndex].text + " " + chance2 + "%<br><br>" +
+    "⚽ Прогноз счёта: " + score1 + " - " + score2;
 }
-
-loadQuestion();
 </script>
 
 </body>
